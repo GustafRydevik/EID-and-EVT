@@ -81,7 +81,14 @@ OB_DEATH: The total number of deaths (suspected or confirmed) reported over the 
 
 ```{r loading the ebola dataset}
 ###Ebola 
-library(GryPack)
+autolib<-function(Package,mirror="http://stat.ethz.ch/CRAN",...){
+  if(!suppressWarnings(require(as.character(substitute(Package)),
+                               character.only=TRUE,quietly=TRUE,...))){
+    Package<-as.character(substitute(Package))
+    install.packages(Package,repos=mirror,...)
+    library(Package,character.only=TRUE)
+  }
+}
 autolib(rfigshare)
 
 

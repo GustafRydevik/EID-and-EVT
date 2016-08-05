@@ -30,16 +30,8 @@ Pathogen Taxonomy:	1=bacterium, 2=virus, 3=protozoon, 4=parasite (i.e. helminth)
 For more details, please see the manuscript.
 
 
-```{r read_dengue}
-autolib(readxl)
-autolib(dplyr)
-autolib(extRemes)
-data.path<-"./outbreak-data/smith-rsi-outbreakdata"
-smith_database<-read_excel(file.path(data.path,"SmithEtAl_outbreakdata.xlsx"))
-names(smith_database)<-str_replace(names(smith_database)," ",".")
-smith_database<-smith_database%>%filter(Total.Cases!=9999)
-smith_database<-as.data.frame(smith_database)
-smith_database<-smith_database[,-9]
-smith_chikungunya<-smith_database%>%filter(Disease=="CHIKUNGUNYA")
+```{r read_smith}
+script.path<-"./scripts"
+source(file.path(script.path,"make-smith-multipathogen-db.R"))
 pextRemes(fevd((smith_chikungunya%>%group_by(Year)%>%summarise(max.cases=max(Total.Cases)))$max.cases),1e8)
 ```
