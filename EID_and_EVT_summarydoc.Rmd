@@ -7,28 +7,38 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+script.path<-"./scripts"
+autolib<-function(Package,mirror="http://stat.ethz.ch/CRAN",...){
+  if(!suppressWarnings(require(as.character(substitute(Package)),
+                               character.only=TRUE,quietly=TRUE,...))){
+    Package<-as.character(substitute(Package))
+    install.packages(Package,repos=mirror,...)
+    library(Package,character.only=TRUE)
+  }
+}
 ```
 
 
 
-This is intended to be a master script, creating all other databases. 
+This is intended to be a master script, running other scripts, and possibly serving as a starting point for an eventual paper. 
 It also at the moment (3rd of august) serves as a general doc capturing thoughts on the project. 
 
 
 
-# Diseases to cover #
-I had a chat with Mark Bronsvoort, and we spent some time brainstorming potentially interesting diseases:
+
+## Diseases to cover ##
+I had a chat with Mark Bronsvoort, and we spent some time brainstorming potentially interesting diseases. IDeally, we would try and create a narrative, where we go from local to global datasets, and using both human and animal diseases. I'm still working on the animal outbreak databases.
 
 
-## Locally##
+### Locally###
  Lyme's disease (George gunn Scotland) 
  Size of TB outbreaks in Scotland - Issue with defining outbreak size here - number of cattles or number of infected herds? 
  
-## Regionally (Europe) ##
+### Regionally (Europe) ###
  E.Coli outbreaks in humans (European)
  
  
-## Globally ##
+### Globally ###
  Cryptosporidium 
  Lumpy skin disease
  African Swine Fever
@@ -37,10 +47,10 @@ Rift Valley fever
 Ebola - have identified a database for this - see make-ebola.Rmd
 FMD - ew can use the OIE-WAHIS database to get a record of outbreaks. again the distinction between endemic (in Africa) and emerging/epidemic (in e.g. Europe/Asia/Americas), and the question of what to do with that.
 
-## General databases ##
+### General databases ###
 Smith etal 
 
-## References of interest ##
+### References of interest ###
  Woolhouse
  EIDs database 
   "70% of zoonotic diseases being emerging" 
@@ -48,4 +58,27 @@ Smith etal
   
 
 
-autolib(extRemes)
+# Summary of current data #
+
+First, run the scripts in the separate documents to create datasets of interest
+```{r databases}
+library(knitr)
+source(file.path(script.path,"make-ebola.R"))
+source(file.path(script.path,"make-smith-multipathogen-db.R"))
+```
+
+
+Then, lets do some descriptive plotting
+
+```{r descriptive}
+hist(ebola_outbreaks$OB_CASE)
+hist(smith_cholera$Total.Cases)
+hist(smith_meningitis_bact$Total.Cases)
+hist(smith_meningitis_viral$Total.Cases)
+hist(smith_nipah$Total.Cases)
+hist(smith_plague$Total.Cases)
+hist(smith_wnv$Total.Cases)
+hist(smith_rvf$Total.Cases)
+hist(smith_tularemia$Total.Cases)
+
+```
