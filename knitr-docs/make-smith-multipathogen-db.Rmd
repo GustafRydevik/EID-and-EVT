@@ -1,0 +1,45 @@
+---
+title: "make-smith-multipathogen-db"
+author: "Gustaf Rydevik"
+date: "3 August 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Description
+
+The following data set is downloaded from http://ramachandran-data.brown.edu/datarepo/request.php?request=explorePublicStudy&StudyID=6&instit=BROWN,
+and linked to an article published at http://rsif.royalsocietypublishing.org/content/11/101/20140950 . 
+
+quoting: This is a README file describing the outbreak data referenced in the Smith et al. paper. These data are available in the file SmithEtAl_outbreakdata.xlsx. 
+
+Below is a list of the column headers and a brief description:
+
+UID:	A unique numerical ID assigned to each outbreak
+Disease:	The disease name, as listed in GIDEON
+Country:	The nation where the outbreak occurred, as listed in GIDEON
+Year:	The year of the outbreak, or the first year if a range of years was given
+Total Cases:	Total number of cases for the given outbreak. (Outbreaks with no case data listed have a value of 9999.)
+Transmission Type:	0=Non-vector borne, 1=Vector Borne
+Host Type:	0=Zoonotic, 1=Human-specific
+Pathogen Taxonomy:	1=bacterium, 2=virus, 3=protozoon, 4=parasite (i.e. helminth), 5=fungus, 6=alga
+
+For more details, please see the manuscript.
+
+
+```{r read_dengue}
+autolib(readxl)
+autolib(dplyr)
+autolib(extRemes)
+data.path<-"./outbreak-data/smith-rsi-outbreakdata"
+smith_database<-read_excel(file.path(data.path,"SmithEtAl_outbreakdata.xlsx"))
+names(smith_database)<-str_replace(names(smith_database)," ",".")
+smith_database<-smith_database%>%filter(Total.Cases!=9999)
+smith_database<-as.data.frame(smith_database)
+smith_database<-smith_database[,-9]
+smith_chikungunya<-smith_database%>%filter(Disease=="CHIKUNGUNYA")
+pextRemes(fevd((smith_chikungunya%>%group_by(Year)%>%summarise(max.cases=max(Total.Cases)))$max.cases),1e8)
+```

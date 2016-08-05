@@ -1,0 +1,104 @@
+---
+title: "make-ebola"
+author: "Gustaf Rydevik"
+date: "27 July 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This dataset is downloaded from https://dx.doi.org/10.6084/m9.figshare.1168886, 
+which is described in http://www.nature.com/articles/sdata201442. In the nature file they describe the variables as follows: 
+
+##Data Format##
+
+The data from this analysis are summarised in two types of data format (Data Citation 1: Figshare http://dx.doi.org/10.6084/m9.figshare.1168886). First a data table details unique geographic locations of Ebola occurrence, including information on type of transmission, location, spread, timing and case number. These geographic locations are grouped into individual outbreaks (n=22) and summary statistics on timings and case and death numbers are given for each outbreak. Second, geographic information files are provided that match the information presented in the data table to explicit geographic areas. These are available in a variety of formats that can be read by geographic information system (GIS) applications. Information from these two file types were used to make the outbreak summary maps and text in Supplementary Figures 1–22 (selected examples in Figs. 2,3,4).
+
+Data table of unique Ebola virus transmission locations
+The table includes the following fields, detailed below. The value ‘NA’ was entered if information was unknown, unreported or indeterminable. The term ‘occurrence’ refers to Ebola transmission locations that are either unique in the geographic location or in their type of transmission (index, secondary or imported). Each row in the table represents a unique Ebola occurrence. A group of occurrences make up contained ‘outbreaks’ and fields with the prefix ‘OB’ summarise various metrics related to the entire outbreak that each occurrence belongs to.
+
+UNIQ_ID: A unique identification number for each occurrence at which index, secondary or imported cases of EVD have occurred at unique geographic locations (n=117).
+
+NAME: Text description of the point or polygon that defines the location of the occurrence.
+
+COUNTRY: The country where the majority of cases occurred in each outbreak.
+
+VIRUS: The Ebola virus species of each outbreak.
+
+CASE_TYPE: The type of transmission represented by the Ebola occurrence. Can be either ‘index’, ‘secondary’ or ‘import’.
+
+DATA_TYPE: Whether the occurrence represents a point or larger polygon location.
+
+LAT: The latitude of the centre point of the point or polygon of the occurrence.
+
+LONG: The longitude of the centre point of the point or polygon of the occurrence.
+
+LOC_NTS: Additional notes describing the site location of the occurrence.
+
+SPR_ORDER: The order of spread between occurrences over the course of the outbreak, as determined by the date of onset of the first case in a given occurrence. Index cases are represented with the value ‘1’. Two or more occurrences share the same spread order if it is unknown which of the two areas Ebola virus transmission spread to first.
+
+SOURCE_1: The unique identification number of the occurrence where the first EVD patient came from.
+
+SOURCE_2: The unique identification number of the occurrence where the first EVD patient came from. An occurrence may have more than one source if infected patients came from more than one source but it is unknown which triggered secondary transmission.
+
+SOURCE_3: The unique identification number of the occurrence where the first EVD patient came from. An occurrence may have more than one source if infected patients came from more than one source but it is unknown which triggered secondary transmission.
+
+STR_DAY: Day of first reported case in the occurrence.
+
+STR_MNTH: Month of first reported case in the occurrence.
+
+STR_YEAR: Year of first reported case in the occurrence.
+
+END_DAY: Day of last reported case in the occurrence.
+
+END_MNTH: Month of last reported case in the occurrence.
+
+END_YEAR: Year of last reported case in the occurrence.
+
+REP_CASE: The total number of cases (suspected or confirmed) reported over the course of the outbreak, but only within the occurrence.
+
+REP_DEATH: The total number of deaths (suspected or confirmed) reported over the course of the outbreak, but only within the occurrence.
+
+OB_ID: A unique identification number for each outbreak (n=22).
+
+OB_STR_DAY: Day of first reported case of the outbreak.
+
+OB_STR_MNTH: Month of first reported case of the outbreak.
+
+OB_STR_YEAR: Year of first reported case of the outbreak.
+
+OB_END_DAY: Day of last reported case of the outbreak.
+
+OB_END_MNTH: Month of last reported case of the outbreak.
+
+OB_END_YEAR: Year of last reported case of the outbreak.
+
+OB_CASE: The total number of cases (suspected or confirmed) reported over the course of the outbreak in all areas.
+
+OB_DEATH: The total number of deaths (suspected or confirmed) reported over the course of the outbreak in all areas.
+
+```{r loading the ebola dataset}
+###Ebola 
+library(GryPack)
+autolib(rfigshare)
+
+
+ebola_outbreaks_detailed<-read.csv(url("https://ndownloader.figshare.com/files/3230399"),header=T,sep=",")
+library(dplyr)
+ebola_outbreaks_detailed%>%
+  group_by(str_replace(OB_ID,"[a-z]",""))%>% ## changing OB_ID-s 11a, ... 11d to 11,and grouping by each outbreak code.
+  filter(UNIQ_ID==min(UNIQ_ID))->ebola_outbreaks ## Keeping the earliest ID within each outbreak
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

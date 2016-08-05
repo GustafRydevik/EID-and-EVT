@@ -1,0 +1,54 @@
+---
+title: "make-dengue"
+author: "Gustaf Rydevik"
+date: "3 August 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Description
+
+The following data set is downloaded from https://figshare.com/articles/Dengue_Occurrence_12122013.xlsx/1035043
+
+quoting: 
+
+A global geographic database of human dengue virus occurrence. The database comprises occurrence data linked to point or polygon locations, derived from peer-reviewed literature and case reports as well as informal online sources. Entries date from 1960 to 2012.
+
+OCCURRENCE_ID: Unique identifier for each occurrence in the database after temporal and locational standardisation.
+
+SOURCE_TYPE: Manual entry vs. HealthMap
+
+LOCATION_TYPE: Whether the record represents a point or a polygon location
+
+ADMIN_LEVEL: The administrative level which the record represents when the location type is a polygon. Values are 0 (national), 1 (state or province), 2 (district), and -999 when the location type is a point.
+
+GAUL_AD0: The country-level global administrative unit layer (GAUL) code (see http://www.fao.org/geonetwork) which identifies the Admin-0 level occurrences as well as the Admin-0 polygon within which any smaller polygons and points lie.
+
+GAUL_AD1: The first-level GAUL code which identifies the Admin-1 level occurrences as well as the Admin-1 polygon within which any smaller polygons and points lie. Values of -999 are assigned when the polygon was Admin-0 level.
+
+GAUL_AD2: The second-level GAUL code which identifies the Admin-2 level occurrences as well as the Admin-2 polygon within which any points lie. Values of -999 are assigned when the polygon was Admin-0 or Admin-1 level.
+
+POINT_ID: The unique identifier which was assigned to points falling within the same 5km x 5km pixel.
+
+UNIQUE_LOCATION: A unique identifier created for all locations (both points and polygons) based upon the point IDs and the GAUL codes.
+
+X: The longitudinal coordinate of the point or polygon centroid (WGS1984 Datum).
+
+Y: The latitudinal coordinate of the point or polygon centroid (WGS1984 Datum).
+
+YEAR: The year of the occurrence.
+
+COUNTRY: The name of the country within which the occurrence lies.
+
+REGION: The region within which the occurrence lies – values are Asia, Oceania (includes Australia), Africa (includes the Arabian peninsula), and Americas.
+
+```{r read_dengue}
+autolib(readxl)
+data.path<-"./outbreak-data/dengue"
+dengue_occurence_database<-read_excel(file.path(data.path,"Dengue_Occurrence_12122013.xlsx"))
+dengue_occurence_year_country<-dengue_occurence_database%>%group_by(YEAR,COUNTRY)%>%summarise(n.occurence=n())
+
+```

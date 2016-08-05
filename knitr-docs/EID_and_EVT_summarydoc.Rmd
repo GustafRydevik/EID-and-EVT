@@ -1,0 +1,51 @@
+---
+title: "EID_and_EVT_summarydoc.Rmd"
+author: "Gustaf Rydevik"
+date: "3 August 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+This is intended to be a master script, creating all other databases. 
+It also at the moment (3rd of august) serves as a general doc capturing thoughts on the project. 
+
+
+
+# Diseases to cover #
+I had a chat with Mark Bronsvoort, and we spent some time brainstorming potentially interesting diseases:
+
+
+## Locally##
+ Lyme's disease (George gunn Scotland) 
+ Size of TB outbreaks in Scotland - Issue with defining outbreak size here - number of cattles or number of infected herds? 
+ 
+## Regionally (Europe) ##
+ E.Coli outbreaks in humans (European)
+ 
+ 
+## Globally ##
+ Cryptosporidium 
+ Lumpy skin disease
+ African Swine Fever
+Dengue - Of high interest as an EID, but has the problem of being endemic... How would we apply EVT to endemic or mixed endemic/epidemic time series? We have a databse of "occurency", but I'm unclear what to make of it. 
+Rift Valley fever
+Ebola - have identified a database for this - see make-ebola.Rmd
+FMD - ew can use the OIE-WAHIS database to get a record of outbreaks. again the distinction between endemic (in Africa) and emerging/epidemic (in e.g. Europe/Asia/Americas), and the question of what to do with that.
+
+## General databases ##
+Smith etal 
+
+## References of interest ##
+ Woolhouse
+ EIDs database 
+  "70% of zoonotic diseases being emerging" 
+ "Trying to estimate the number of pathogens out there." !!
+  
+
+
+autolib(extRemes)
