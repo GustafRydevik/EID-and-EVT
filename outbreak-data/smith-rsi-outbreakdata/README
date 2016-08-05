@@ -1,0 +1,19 @@
+AUTHOR: Michael Goldberg
+Brown University - Ramachandran and Smith Labs
+megoldberg2@gmail.com
+20 February, 2014
+
+This is a README file describing the outbreak data referenced in the Smith et al. paper. These data are available in the file SmithEtAl_outbreakdata.xlsx. 
+
+Below is a list of the column headers and a brief description:
+
+UID:	A unique numerical ID assigned to each outbreak
+Disease:	The disease name, as listed in GIDEON
+Country:	The nation where the outbreak occurred, as listed in GIDEON
+Year:	The year of the outbreak, or the first year if a range of years was given
+Total Cases:	Total number of cases for the given outbreak. (Outbreaks with no case data listed have a value of 9999.)
+Transmission Type:	0=Non-vector borne, 1=Vector Borne
+Host Type:	0=Zoonotic, 1=Human-specific
+Pathogen Taxonomy:	1=bacterium, 2=virus, 3=protozoon, 4=parasite (i.e. helminth), 5=fungus, 6=alga
+
+For more details, please see the manuscript.

@@ -1,0 +1,20 @@
+Disease	Country	Year	Country Flag	Animal Flag	Publication Year Flag	Record Text	Total Cases
+DENGUE	INDIA	1981	0	0	0		24
+DENGUE	INDIA	1985	0	0	0		451
+DENGUE	INDIA	1991	1	0	1	An outbreak (5 hospitalized) was reported in Madhya Pradesh. A British tourist acquired the disease while travelling in Madhya Pradesh.	9999
+DENGUE	INDIA	2002	0	0	0		10
+DENGUE	KENYA	2012	0	0	0		6242
+DENGUE	TANZANIA	1990	0	1	1	An outbreak (12 cases) was related to an epizootic in a nearby goat population.	12
+DENGUE	TANZANIA	1993	0	1	0	An outbreak (24 deaths) of bovine dengue occurred.	9999
+DENGUE	UNITED KINGDOM	1999	1	0	0	A group of missionaries developed DHF after returning from a service trip to the Dominican Republic.	9999	
+SALMONELLOSIS	CZECH REPUBLIC	1984	0	0	0		87
+SALMONELLOSIS	CZECH REPUBLIC	1987	1	0	0	An outbreak was associated with ghee, imported from India.	9999	
+SALMONELLOSIS	CZECH REPUBLIC	2002	0	0	0		13
+SALMONELLOSIS	INDIA	1987	1	0	0	An outbreak in the Czech Republic was associated with ghee imported from India.	9999	
+SALMONELLOSIS	INDIA	2001	0	0	0		25
+SALMONELLOSIS	INDIA	2008	0	0	0		100
+SALMONELLOSIS	SOMALIA	2013	0	0	1		992
+SALMONELLOSIS	SOMALIA	2013	0	0	0		24
+SALMONELLOSIS	UNITED KINGDOM	2000	1	0	0	A group of tourists from the United Kingdom contracted Salmonellosis while on vacation in Vanuatu.	9999	
+SALMONELLOSIS	UNITED KINGDOM	2010	0	0	0		9999	
+SALMONELLOSIS	VANUATU	2000	1	0	0	A group of tourists from the United Kingdom contracted Salmonellosis while on vacation in Vanuatu.	9999	

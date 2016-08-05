@@ -1,0 +1,24 @@
+AUTHOR: Michael Goldberg
+Brown University - Ramachandran and Smith Labs
+megoldberg2@gmail.com
+13 August, 2013
+
+These scripts are written in Python, and were written with version 2.7.3 on a Mac, OS X 10.8.4.
+They should work on all platforms, and require no additional packages from Python. To run, navigate to the Sample_disease_parser directory in terminal and run the 'sample_all_disease_parser.py' script with python, followed by the names of the following files, in order and separated by a space: (1) the name of the outbreak records file (must be a .txt file), (2) desired name of the output file (must be a .txt file), and (3) the name of the country names list (must be a .txt file). 
+
+On a Mac, a prototype command using the sample files provided is:
+'python sample_all_disease_parser.py Sample_outbreak_records.txt Sampled_parsed Sample_country_list.txt'.
+
+This generates the tab-delimited text file 'Sample_parsed' as the final output.
+
+FILES IN THIS DIRECTORY:
+(1) sample_all_disease_parser.py : This is the parsing script which splits the input record text file by
+disease and calls the methods in 'sample_single_disease_parser.py'.
+
+(2) sample_single_disease_parser.py : The script which contains the main parsing function (singleDiseaseParser). singleDiseaseParser takes as input a disease name (in all caps) and a string of record texts of the diseases' outbreaks and returns a string of the parsed data from the outbreaks. The data is returned in tab-delimited format.
+
+(3) Sample_country_list.txt : A sample of the nations and territories in GIDEON and is used as an auxiliary file in 'sample_single_disease_parser.py'. 
+
+(4) Sample_disease_list.txt : A sample of the diseases listed in GIDEON; this list is also used as an auxiliary file in 'sample_single_disease_parser.py'.
+
+(5) Sample_outbreak_records.txt : A sample text file of outbreak records; these data were fabricated for software demonstration purposes. The records are organized by disease and nation or territory.
